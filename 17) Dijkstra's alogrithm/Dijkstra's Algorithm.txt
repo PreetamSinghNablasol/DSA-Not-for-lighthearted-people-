@@ -1,0 +1,20 @@
+working of dijkstra's algorithms :
+
+its used in SSSP in case of Weighted graph to find the best path from a single point to other nodes. BUT ONLY FOR NON NEGATIVE CYCLES.(i.e if there is a cycle, and  in the cycle if we add the weights of all the nodes involved in the cycle, if they are negative. In such case dijkstra's algox fails.)
+
+ALGOX : 
+we simply maintain a sorted DS (prefered priority queue) so that we can access the node with smallest value asap.
+we start from initial point and check all dependant nodes.
+we update the distance parameter for the dependant nodes, add them to the priority queue along with that also maintain ds for visited.
+now on top of min-priority dequeue and repeat what we did for the initial node :)
+
+QUESTION : what is a negative cycle ?
+ANSWER : a negative cycle, is a cycle in weighted graph, such that if we add the weights of all the edges in the cycle, the sum is negative.
+
+QUESTION : why dijkstra fails in a negative cycle ?
+ANSWER : in a negative cycle, the dijkstras algox gets stuck in an infinite loop, this is because if we keep looping th cycle, WE WILL KEEP GETTING LESSER AND LESSER PATH DISTANCE IN NEGATIVE AND HENCE THE CYCLE WONT STOP.
+
+QUESTION : is it possible to find SSSP in negative cycles ?
+ANSWER : NO ITS NOT!! the issue is that SSSP fails in detecting the cycle even and goes infinite loop. Belman ford algox will help us prevent by performing SSSP with negative cycle detection.
+
+

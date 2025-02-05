@@ -1,0 +1,108 @@
+Dynamic Programming : 
+
+Dynamic Programming is an algorithmic technique for solving an optimization problem by breaking it down into simpler subproblems and utilizing the fact that the optimal solution to the overall problem depends upon the optimal solution to its subproblems.
+
+
+eg. : eg. given that 1+1+1+1+1+1 = 6, and we have to find 1+1+1+1+1+1+2, in this case instead of adding the ones again, we instead use the already computed value to conclude that answer will be 6+2.
+
+So we store the solution of subpart of a problem and then utilize it later.
+
+IMPORTANT NOTE : Dynamic programming is an optimization on divide and conquer algorithm!!!!
+
+So just like Divide and conquer we divide the problem into sub problems and cumulate the result into a single result. But in DP, we just store the subproblem solutions so that they dont have to be computed again. This increases the efficiency.
+
+PROPERTIES OF DP : 
+
+-> Optimal Substructure(same as Div and Conq) : if any problem's overall optimal solution can be constructed from the optimal solutions of its subproblems then this probelm has optimal substructure. 
+
+eg : fib(n) = fib(n-1) + fib(n-2);
+
+-> Overlapping Subproblems : Any problem has overlapping sub-problems if finding its solution involves solving the same problem multiple times.
+
+
+......................................................................................................................................................
+
+DIFFERENT METHODS OF DP  :
+
+-> Top down with Memoization : Solve the bigger problem by recursively finding the solution to smaller subprobelms. Whenever we solve a sub-problem, we cache its result  so that we dont end up solving it repeatedly if its called multiple tiems. This technique of storing the results of already solved subproblems is called Memoization.
+
+its called  top down since, first the recursive tree is solved from top to bottom and then after we have memoized, we can skip instances.
+
+eg. when sloving fibonacci series, we start with the bigger problem and recursively reach the smaller problem.
+
+public int fibMemo(int n, Hashmap<Integer, Integer> memo){
+    if(n==1) return 0;
+    if(n==2) return 1;
+    if(!memo.containsKey(n)) memo.put(n,(fibMemo(n-1,memo)+fibMemo(n-2, memo)));
+    return memo.get(n);
+}
+
+
+
+
+-> Bottom up with Tabulation : Tabulation is th eopposite of the top - down approach an avoids recursion. In this approach, we solve the problem ' Bottom Up" (i.e. by solving all the related subproblems first.) This is done by filling up a table based on the results in th etable, the solution to the top/original problem is then computed.
+
+NOTE: eg. : when solving fibunacci, we start from the smalled subproblem and hence from 1 and then 1 and then 2 then 3 then 5 and so onn. Hence we can avoid repitition of subproblems again if we dont use recursion but begin from the smallest subproblem.
+
+public int fibTab(int n){
+    ArrayList<Integer> tb = new ArrayList<Integer>();
+    tb.add(0); // adding minimal subproblems
+    tb.add(1); // adding minimal subproblem 
+    for(int i=2; i<n-1; i++){
+        int n1 = tb.get(i-1);
+        int n2 = tb.get(i-2);
+        tb.add(n1+n2);
+    }
+    return tb.get(n-1);
+}
+
+IMPORTANT : Div and Conq has c^N time complexity for fibunacci but Dynamic programming has N time complexity !!
+
+Top down vs Bottom up  :
+
+-> EASYNESS : Top down is easy to come up with solutions as it extends divide and conquer whereas Bottom up is difficult to find 
+-> RUNTIME  : in runtime, Top down is slwo because of recustion whereas bottom up is fast.
+-> SPACE EFFICIENCY : in top down, unnecessary use of stack is there 
+-> WHEN TO USE : when we need a quick solution, eg. in an interview use top down wheras if have time use bottom up approach since its more efficient
+
+
+QUESTION : is merge sort using dynamic programming ? And how to identify dynamic programming problems.
+ANSWER : we check the following conditions to check if we can use dynamic programming or not : 
+-> Does it have optimal Substructure property.
+-> Does it have overlaping subproblems property.
+
+Merge sort does have optimal substructure however there is no overlapping subproblems property.
+
+
+.....................................................................................................................................................
+
+QUESTION : NUMBER FACTOR PROBLEM : (NOTE: different order counts as different output)
+Given N, find the number of ways to exress N as a sum of 1, 3 and 4.
+ANSWER: 
+NOTE: Number of ways 5 can be represented using 1, 3 and 4 = 3+(Number of ways to represent 4 + Number of ways to represent 2 + Number of ways to represent 1)
+
+we can modify the solution to not include different combinations of same solutions but whatever.
+
+4 can be reprsented as : 
+4, 
+1 3, 
+3 1, 
+1 1 1 1
+
+QUESTION: HOUSE ROBBER : 
+-> Given N number of houses along the street with some amount of money
+-> Adjacent houses cannotbe stolen 
+-> Find the maximum amount that can be stolen.
+
+
+
+QUESTION : CONVERT ONE STRING TO ANOTHER : 
+-> S1 and S2 are given strings
+-> convert s2 to s1 using delete, insert or replace operations
+-> find the minimum const of edit opearation.
+
+ANSWER: NOTE: remmeber in the case where the respective elements are same, we dont count step(and dont add 1) since that does not need delete, insert or replace opearions.
+
+IMPORTANT NOTE : in this problem for bottem up approach, make a hashmap and use index1+index2 as the key !!! U will find out why hehe.
+since then we can do this : 
+map.put(2*size1, size2-size1); as a base case.

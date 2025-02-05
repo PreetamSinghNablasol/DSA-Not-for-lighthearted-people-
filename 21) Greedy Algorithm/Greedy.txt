@@ -1,0 +1,73 @@
+# Greedy Algorithm :
+
+In each step we select the best outcome :)
+
+-> Greedy algorithm builds solution piece by piece.
+-> It selects the next piece that gives the most obvious and immediate benifit.
+
+QUESTION: where to use greedy algorithm?
+ANSWER: in problems where the local optimal solution lead to global optimal solution.
+
+eg. 
+- Insertion Sort.
+- Selection Sort.
+- Topological Sort.
+- Prim's Algox.
+- Kruskal ALgorithm.
+
+Unknown and to learn : 
+- Activity selection problem 
+- Coin change problem
+- Fractional Knapsack Problem 
+
+......................................................................................................
+......................................................................................................
+
+QUESTION : Activity Selection Problem : 
+Given N number of activities with their start and end times. We need to select the maximum number of activities that can be performed by a single person, assuming the person can only work on a single activity at at time. EG. 
+
+ACTIVITY : A1   A2   A3   A4   A5   A6
+START    : 0    3    1    5    5    8
+FINISH   : 6    4    2    8    7    9
+ 
+
+ANSWER: The key is to sort the data on the baseis of finish time, and then we can find the sequence by finding the local best solutions.(NOTE the first activity after sorting will always be optimum)
+(O(N logN)) is the complexity that too because of sorting :)
+
+......................................................................................................
+
+QUESTION: Coin Change Problem
+You are given coins of different denomications and total amount of money. Find the minimum number of coins that you need to make up the given amount.(repetition of given coins is allowed)
+
+ANSWER: the algox is simple, we sort the given coins and then we compare the target with the given amount, if biggest given coin is smaller than the desired amount, target = target - biggest given coin then check again if oone more time target is smaller than biggest. Repeat for entire sorted array. fin.
+
+->  find the biggest coin less than givn total number
+->  add coin to the result and subtract coind from total number 
+->  if V == zero : print result 
+        else repeat first 2 steps.
+
+O(NLog(N)) :)
+
+.......................................................................................................
+
+QUESTION : Knapsack Problem 
+Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to given limit and the total value is as large as possible.
+NOTE: it is a problem in Combinatorial Optimisation. It derives its name from someone with with a sack of valuable and must chose the most valuable items but only to the amount that he can carry. This problem helps in resource allocation where the decision has to be made about what tasks can be done under the given budget and constraints.
+
+Imagine a big Box that contains a fixed weight limit, we are given other items with different values to fit in the box in such a way that we dont exceed the weight limit and fit as valuable as possible items in the box. 
+
+IMPORTANT : Fractional Knapsack problem :  Fractional Knapsack problem is Knapsack problem, BUT, WE CAN BREAK DOWN ITEMS INTO FRACTIONS.
+
+ANSWER: ALGOX : 
+
+We use greedy here by finding out which item has MORE DENSITY !!!! 
+NOTE: Density here is, Value/Weight i.e. value per unit weight.
+
+-> we fill the knapsack first, with the item that has the most density since that is more profitable
+-> then if the entire item fits we go to the next item and so on 
+-> NOTE: since its fractional knapsack, incase we cant fit an item fully, we can simply break the item into a smaller fraction to fit the knapsack.
+
+Hence this uses greedy since, we are finding the best item to fit by density.
+Normal knapsack wont allow the items to be split into smaller portions and that it.
+
+O(NLog(N)) because of sorting :)

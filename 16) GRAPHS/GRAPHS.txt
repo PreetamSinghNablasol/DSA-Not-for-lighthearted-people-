@@ -1,0 +1,124 @@
+# Why? Graph?
+
+A graph is a non linear DS containing Nodes(vertex) and edges.
+
+Graphs are used in networks and social networks and stuff.
+
+
+
+# Terminology :
+
+Unweighted graph -> A graph which does not have a weight associated with any edge.(i.e. nodes have a weight or we can say length)
+
+Weighted graph -> edges have weight that help us prioratise certain edges over other.
+
+Directed graph -> where the direction of traversal is specified on edge.
+
+Undirected graph -> when there is no fixed direction in graph for traversal.
+
+Cyclic graph -> if a graph has a single loop, its called cyclic.
+
+Acyclic graph -> where a graph has no loop.
+
+Tree -> tree is a special case of DIRECTED ACYCLIC GRAPH.
+
+
+
+# Graph types :
+
+Check image :)
+
+Unweighted - undirected : obvious
+
+Unweighted - directed : obvious
+
+Positive - weighted - undirected : Graph weights are positive :) with no direction.
+
+Positive - weighted - directed : Graph weights are positive with directions.
+
+Negative - weighted - undirected : Graph weights can be positive and negative both without directions.
+
+Negative - weighted - directed : Graph weights can be positive and negative both with directions.
+
+
+
+# Graph Representation
+
+Adjacency Matrix : its a square matrix and the elements of the matcix indicates wheather pairs of vertices are adjacent or not in the graph.
+		the dimention of matrix is : number of nodes X number of nodes.
+		NOW note that each node will represent a node and hence all the elements are 0 except for that connections that are present and they will be 1.
+		NOTE that we can even determine a directed graph this way :), eg. if arr[A][B] = 1 but arr[B][A] = 0, this means that we can only go from A to B.
+
+Adjacency List : so we make an array containing LinkedList nodes representing all the elements in graph, then we create a linked list at each array index, and the linked list at a single array index will contain all the nodes that the corresponding node has access too.
+
+0 A -> B -> C -> D
+1 B -> A -> E
+2 C -> A -> D
+3 D -> A -> C -> E
+4 E -> B -> D
+			
+# which one to choose ?
+
+if graph is complete or almost complete graph, use Adjacency Matrix
+if graph number of edges are few, use Adjacency List
+
+Since 2d matrix is not space efficient hence we should use the matrix when there are many vertices so that the matrix is not just filled with 0.
+Adjacency list is much more convenient when it comes to space but then the lookup is kinda linear.
+
+
+# Graph traversal
+
+BFS : start at arbitary node of graph and explore the neighbor nodes (which are at current level) first, before moving to the next level neighbors.
+
+nodes have to maintain a seperate parametere for traversal in BFS in graph since, we dont want to go into a cycle. Also we maintain a queue for traversal and as we remove from head of queue, we add all the elements that the removed node points to. 
+
+when we perform BFS: Adjacency list complexity BFS(V+E)
+			   Adjacency Matrix complexity BFS (V^2)  
+               /
+V => Vertices / E => Edges
+
+
+DFS : similar to BFS just we maintain a stack in place of queue and the complexity remains same :)
+
+	
+# Topological Sort : 
+
+in a directed graph, topological sort is accessing elements in a order that does not violate the order of the directions.
+also we use recursion :)
+
+(This cant be evaluated in case of cycles.) 
+
+so we simply just maintain a set to check for the nodes that have been inserted. Then recursively, we add the nodes that dont have dependant child into stack and if they have dependant child, we go to the child. after inserting a node we mark the node visited by adding it to set. if all the dependant child are marked visited, the node itself is pushed to stack.
+
+Maintain a stack and in that do this :
+
+if a vertex depends on currentVertex
+    go to that vertex and then come back to currentvertex
+else if there is no dependant left
+    push currentVertex to stack 
+
+
+NOTE: we need 2 functions, first one will push all the nodes in our tree into second function, and second will add elements recursively.
+
+
+# Single Source Shortest Path Problem :
+
+How do we find the shortest path from one node in graph, to any other node in graph ?
+
+we have 3 algox : 
+
+> BFS(for unweighted graph where number of hops determines the shortest path.)
+> Dijkstra's
+> Bellman Ford
+
+NOTE : DFS cant be used in case of SSSPP since, DFS has a tendence to go "AS FAR AS POSSIBLE" from source. Hence cant find shortest path.
+
+BFS(SSSPP) : we traverse the nodes of graph using BFS BUT! we start from the starting node and maintain additional variables for every node(prolly a hashmap) for keeping track of the parent node of the current node. Hence once we have traversed the whole graph we can backtrack from any node using the parent variable to find the shortest path to the starting node.IMPORTANT NOTE : BFS IS LIT !!! since it reaches child nodes in shortest path.
+
+QUESTION: Why is BFS PREFERED ?
+ANSWER : Think about it !!! suppose a node has two paths leading to another node, one is 3 hops away and another is 5 hops away, BFS WILL REACH THE NODE in 3 rd level !!!!! and when it reaches again at level 5, it will be already visited!!!. Hence BFS really does help find shortest path.
+
+Dijkstra's algorithm for SSSPP(For positive weighted graph) : in this algorithm also, we maintain seperate variables so as to evaluate the best path from one node to all the other nodes. 
+
+								=> next folder
+

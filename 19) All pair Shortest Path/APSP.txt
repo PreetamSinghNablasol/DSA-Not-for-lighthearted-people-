@@ -1,0 +1,6 @@
+How is this different from SSSP ?
+
+In sssp we find the shortest path of one node from all other nodes.
+whereas in APSP we do the same but between all the nodes !!!
+
+this can be done by applying SSSP for all the nodes or using floydd warshall.

@@ -1,0 +1,42 @@
+Bellman ford is capable of performing SSSP in directed weighted graphs even if they have Negative cycle.
+
+NOTE: we can only report Negative cycles and not evaluate SSSP from them :(
+
+Bellman ford is same as as Dijkstra's algorithmn but there is a single catch.
+
+we add an additional condition : 
+
+```
+
+If the distance of destination vertex > (distance of source vertex + weight between source vertex and destination vertex) :
+    Update distance of destination vertex to (distance of source vertex + weight between source and destination vertex).
+
+```
+
+basically, we set all the nodes except for the source vertex to infinity
+the source vertex is set to 0, 
+Then, we iterate through all the given edges and apply the condition given below for updation of SSSP weights on each node.
+
+QUESTION : how many times do we iterate ?
+ANSWER : n-1 iterations since it runs iteration per node but since we set the initial node to 0 as default hence. :)
+ 
+QUESTION : how are negative cycles detected ? 
+ANSWER : Bellman ford states that the SSSP will be found in n-1 iterations BUT if we run it nth time and there are changes in SSSP values, then there is a negative cycle.
+
+HENCE NOTE : if on nth cycle there are changes in the SSSP distance, then there exists a negative cycle.
+
+QUESTION : why does bellman ford run in n-1 times ?
+ANSWER : lets look at what bellman ford algo is trying to do to evaluate the answer :
+-> If any node is achieved better distance in previous iteration, then that better distance is used to improve distance of other vertices.
+-> so what could be the worse case here ?  eg >  A--10--> B--20--> C--30--> D--40-->E
+        the above is an example of degenerate case, where we need atmost n-1 iterations.
+        when we use bellman ford, note how each vertex is dependant on one another and hence we need to go in a way linearly to find the shortest path to the last intex !!
+-> n-1 since we set the starting node to 0 initially.
+-> hence we even conclude that atmost there should be only n-1 iterations and if changes continue above that, its faulty.
+
+
+Here are the steps :
+1.) initialize distance of first node to 0
+2.) set all other nodes to infinite(setting neigbours distance value to infinite can be set in the constructor of node :) 
+3.) next just iterate over every neigbour of every node n-1 times :)
+

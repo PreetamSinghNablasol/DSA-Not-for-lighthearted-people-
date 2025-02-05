@@ -1,0 +1,61 @@
+Union Find is also called disjoint set.
+
+Actually, Disjoint sets are a DS and Union Find is an algorithm that works on disjoint sets.
+
+Union find is a DS used to keep track of elements that are split into various disjoint sets by merging them in a bigger group.
+OPERATIONS : 
+		> FIND : this tells the group an element belongs to
+		> UNION : union merges two groups together.
+
+
+Union find is used to merge without any loops i.e. trees and not graphs.
+
+ > UNION FIND USES : KRUSKAL MINIMUM SPANNING TREE ALGORITHM
+ 		- in this all the paths between points on a graph are arranged in ascending order and union find is performend till 
+ 		  all the points are connected and we get the minimum spanning tree.
+
+ 		  	also used in network connectivity to find the optimal path.
+
+ - Union find is used to find the most efficient path.
+
+ - helps determine if two nodes are in the same set or in disjoint sets.
+ - to prevent cycles while merging two disjoint sets.
+
+
+> COMPLEXITY : 
+		- Construction : O(n)
+		- Union, Find, Get Component size, check if connected: alpha(n)
+		- Count components : O(1)
+
+		alpha(n) is actually Amortized constant time ie. Almost Constant time.
+	
+
+BIJECTION : Bijection is mapping elements to numbers, i.e. sort of indexing.
+
+THE above simple Union find is without path compression and does not have the alpha(n) complexity
+since cheking parent of a node is tidious as traversal is to be done until reaching the parent node.
+
+for that we introduce PATH COMPRESSION.
+
+the idea behind Path compression is that while we traverse up to find the root node in the find function(for cheching the group a node belongs to), we simply move all the nodes that we come across above one parent such that all the nodes in the end point to the root node of the group.
+
+
+BUILDING THE DS :
+
+- we use bijection such that, if there are 20 disjoint sets to deal with, we assign a number from 0 to 19 to root of each disjoint set. now, simple we can use a hash table to store the root-key pair so we can search for a disjoint set given the root in constant time.
+
+- now we make an array where the index of array will represent he disjoint set, and the content of array will tell the parent of the disjoint set.
+
+- initially every disjoint set will point to its own self eg. a disjoint set with key 4 , will have value 4  in the array 
+	=> arr[4] = 4.
+
+- the find() function will return the root of the node and also while traversing to find the root , make all the nodes it comes across point to the root node.(PATH COMPRESSION)
+
+- the union() function will merge two disjoint sets by making root of one point to another. This can be done by taking note and merging the one with smallar size into one with the bigger size. or it can be done on the bases of height.(maximum height of traversal needed to reach a node from the root node.)
+
+IMPROVEMENTS : 
+		> the above methods are based on arary storing , we can even implement the above using the nodes and pointers
+			- like using tree operations to store the values
+
+		> its better to maintain an array that keeps track for the size of the disjoint sets so that while merging its much easier to lookup the size instead of traversal.
+

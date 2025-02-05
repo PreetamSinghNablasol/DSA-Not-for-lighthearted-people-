@@ -1,0 +1,14 @@
+Trie is used to store strings in a space and time efficient manner,
+A single node can have multiple characters too.
+Every node keeps track of the end of string, ( in a trie, every node has a flag called end of string, and if that is true, means that the node is the end of string.)
+NOTE : tempting it may look, dont, DONT ever create a loop in a trie, since trie is supposed to be a tree :)
+
+Trie is a beast, check the image of trie to better understand.
+
+Spellchecker and auto completion use trie.
+
+NOTE : when we make a trie, A single trie node contains a Mapping of words to other words and hence a single node is capable of containing multiple words.
+
+the ideology behind trie is that the words or suffix shared by words can be shared and hence saving time and memory in the longrun.
+
+ 

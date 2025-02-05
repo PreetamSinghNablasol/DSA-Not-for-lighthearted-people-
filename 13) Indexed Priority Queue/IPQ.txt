@@ -1,0 +1,11 @@
+Why do we need indexed binary tree ?
+
+: Indexed binary tree allows us to update the priority and number of elements easily when needed.
+
+in indexed binary key we maintain a indexing (using hashmap prolly) so we can easily access the elements in the PQ.
+
+in a normal PQ the removing and updation take linear time since, we have no way to find an element except for linear traversal, whereas here we can access the elements easily since we have a mapping to access the elements.
+
+hence we have 3 values we maintain per node : priority value, the heap array index value and the mapping array index value.
+
+Note that when we update values in the indexed priority queue, we have to update values in all the additional array and other DS we are maintaining.

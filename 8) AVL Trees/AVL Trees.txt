@@ -1,0 +1,16 @@
+
+> height vs depth in trees :
+
+- depth of a node is, its path to root.
+- height is the longest path to reach leaf node from root.
+
+
+> AVL TREES :
+	- AVL trees maintain Balance factor along with the binary search tree property.
+	- Balance is actually height of left node - height of right node 
+			- i.e. balance factor = height left - height right.
+	- note that height is the longest possible path to reach a node in this case.
+	- SO in avl trees for balancing the tree , the balance is to be maintained from -1 to 1, otherwise the tree is unbalanced and needs to be balanced.
+
+>> WORST CASE FOR A BST : when a tree is skewed, i.e. linear like a linear DS, it is the worst case.
+		so if the BST is made balanced and the height of the tree is maintainded to log n, the worst case complexity becomes O(log n).. and thats neat.

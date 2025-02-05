@@ -1,0 +1,275 @@
+Divide and Conquer : 
+
+VERY IMPORTANT NOTE : Many of the problems below, follow the same type of approach and hence check it out propely. The key is to  :
+-> Find the base case 
+-> Split the problem in such a way that the problem can be split
+
+Divide and conquer is an algorithm design paradigm which works by recursively breaking down a problem into subproblems aof similar type, until these become simple enough to be solved directly. The solutions to the subproblems are then combined to give a solution to the origial probelm.
+
+QUESTION : where to use this ?
+ANSWER : porblems where problems can be broken into smaller segments and then the results can be combined to give the problem of the problem.
+
+## Property of divide and conquer algox :
+
+-> if any problem's overall optimal solution can be constructed from the optimal solutions of its subproblem, then the problem has optimal substructure.
+
+QUESTION : why we need it ?
+ANSWER: since it is the most effective when the problem has optimal structure.
+
+MergeSort, QuickSort and Binary search are examples of this algox.
+
+.....................................................................................................................
+.....................................................................................................................
+
+## Common divide an conquer problems : 
+
+QUESTION : Number Factor Problem : 
+Given number N, find the number of ways to express N as a sum of 1,3 and 4.
+(Can be done using BackTracking also)
+
+ANSWER: There is a pattern here note we can divide this into sub problems : 
+
+eg. if N = 5 and set = {1, 3, 4}
+-> find N- all from set and that will be : 4, 2 and 1
+
+-> SO we find the ways we can represent 4, 2 and 1 using set !! and then add what it takes to make them 5 again
+
+-> 4 can be made with {4}, {1,3}, {3,1}, {1,1,1,1} => 4+1 can be made with {4,1}, {1,3,1}, {3,1,1}, {1,1,1,1,1}
+   2 can be made with {1,1}     =>  2+3 can be made with {1,1,3}
+   1 can be made with {1}       =>  1+4 can be made with {1,4}
+
+NOTE: hence, the solution to the problem lies in sub problems and this can be broken down.
+
+also NOTE: we are not finding all the permutaions but the number of possible ways.
+
+base case to come out of recursion : 
+if((n==0)||(n==1)||(n==2)){
+    return 1;
+}
+
+QUESTION : HOUSE ROBBER PROBLEM
+
+Given N number of houses with the amount in each house, find the highest amount that can be stolen with the following catch : 
+-> Stealing from adjacent houses alerts the Police.
+
+ANSWER : The algorithm again divides the problem into subproblems and with that we approach the following : 
+
+starting we can have 2 case : 
+1.) we include the first : firstHouseAmount + (best from first+2 index since we skip first+1)
+2.) we dont include the first house :  (best from first+1 and we skipped first)
+
+we take whichever of these two houses gives the highest total amount stolen.
+
+eg. a b c d e 
+in this street, the first iteration will be 
+1.) If we take a : valueOf a + (the answer of c d e)
+2.) if we dont take a : (the answer to of b c d e)
+and we will take whichever of the two gives us the bigger output.
+
+if (current == arr.length - 1) {
+            return arr[arr.length - 1];
+        }
+        if (current >= arr.length) {
+            return 0;
+        }
+        return houseRobber(arr, current + 1) > arr[current] + houseRobber(arr, current + 2)
+                ? houseRobber(arr, current + 1)
+                : arr[current] + houseRobber(arr, current + 2);
+
+
+IMPORTANT QUESTION : CONVERT ONE STRING TO ANOTHER :  
+-> S1 and S2 are given strings
+-> convert s2 to s1 using delete, insert or replace opeartions
+-> find the minimum count of edit opeartions
+
+ANSWER :  Lets look at 3 cases :
+S1 = "table" and S2="tgable"                  Delete
+S2 = "table" and S2="tble"                    Insert
+S2 = "table" and S2="tcble"                   Replace
+
+NOTE: this problem is pretty difficult to pay attention : 
+
+S1 = "table" and S2="tgable" , Here we can make a function to sort the string by removing g and then comparing "ble" from S1 and "ble" from S2 
+and like this we will simply divide the strings and do stuff !!
+
+=) algox :
+
+findMinOpeartion(s1, s2, index1, index2) :
+    if index1 == len(s1)
+        return len(s2) - index2
+    if index2 == len(s2)
+        return len(s1) - index1
+    if s1[index1] == s2[index2]
+        return findMinOperation(s1, s2, index1+1, index2+1)
+
+else 
+    deleteOp = 1 + findMinOpeation(s1, s2, index1, index2+1)
+    insertOp = 1 + findMinOpeation(s1, s2, index1+1, index2)
+    replaceOp = 1 + findMinOpeation(s1, s2, index1+1, index2+1)
+return min(deleteOp, insertOp, replaceOp)
+
+NOTE: the first base case : index1 == len(s1) means that, s1 has extra characters that need to be removed, and removing each of the extra characters is an extra step and hence we return the remaining characters.
+
+index2 == len(s2) means that s2 has ended and we need to add the remaining extra characters and hence we know there will be the remaining number of elements in s1 number of steps.
+
+
+QUESTION : ZERO ONE KNAPSACK PROBLEM : 
+-> Given the weights and profits of N items
+-> Find the maximum profit with given capacity C 
+-> Iteams cannot be broken
+
+ANSWER : This is just knapsack problem but with a catch that the items cannot be broken. 
+
+The major difference is that this time even if we evaluate the cost per unit we cannot break the items and hence must either take them whole, or reject them completely.
+
+Suppose we are given  A B C D E and F ,  we can break the problem into the following instances : 
+
+option 1.) we take A and f(b, c, d, e, f)
+option 2.) we dont include A and f(b, c, e, f)
+
+and we take the max out of them : 
+
+algox : 
+
+zoKnapsack(items, capacity, currentIndex):
+    if capacity <=0 or currentIndex < 0 or currentIndex > len(profits)
+        return 0
+    else if currentItemWeight <=capacity 
+        Profit1 = currentItemProfit + zoKnapsack(itesm, capacity - currentItemWeight, nextItem)
+        Profit2 = zoKnapsack(iteams, capacity - currentItemsWeight, nextItem)
+        return max(Profit1, Profit2)
+    else return 0
+
+QUESTION : LONGEST COMMON SUBSEQUENCE (LCS) : 
+->  S1 and S2 are given strings 
+-> Find the length of the longest subsequence which is commmon to both strings.
+-> Subsequence: a sequence that can be driven from another subsequence by deleting some elements without changing the order of them. 
+eg. : ABCDE has subsequence : ACE, ADE, ACB, ABCE, ABDE etc.
+
+ANSWER:  this is somewhat similar to convert one string to another problem.
+
+How do we divide the problem into 2 ?
+There are 2 cases : 
+eg. : in elephant and erepat, NOTE: that when we compare l from elephant and r from erepat, we can either look for l in erepat, or we can look for r in elephant hence : 
+S1 = "elephant"
+S2 = "erepat"
+
+IMPORTANT: Number of Options : 
+OPTION 1:  respective elements are equal and hence we move one forward in both the index of string.
+OPTION 2: not equal hence move 1 forward in first string.
+OPTION 3: not equal hence move 1 forward in second string.
+
+Then we take maximum of the 3 options.
+
+algox : 
+public int solution(String s1, String s2, int index1, int index2) {
+        if (index1 == s1.length() || index2 == s2.length()) {
+            return 0;
+        } else {
+            int option1 = 0;
+            if (s1.charAt(index1) == s2.charAt(index2)) {
+                option1 = 1 + this.solution(s1, s2, index1 + 1, index2 + 1);
+            }
+            int option2 = this.solution(s1, s2, index1 + 1, index2);
+            int option3 = this.solution(s1, s2, index1, index2 + 1);
+            return Math.max(option1, Math.max(option2, option3));
+        }
+    }
+
+
+QUESTION : LONGEST PALINDROMIC SUBSEQUENCE : 
+-> S i sa given string 
+-> Find the longest subsequence (LPS)
+-> Subsequence : a sequence that can be driven from anotehr seuqnce by deleting some lements without changing the roder of them 
+-> Palindrome is a string that reads the same backwards as well as forward.
+
+ANSWER: now for checking palindrome subsequence, again we will be checking the string with one pointer on the start and anoter at the end. and in that scenario there can again be 3 cases : 
+
+CASE 1 : The char at start and end are equal 
+CASE 2 : The char at start and end are not equal so we move the end to end-1;
+CASE 3 : The char at the start and end are not equal so we move the start to start+1;
+
+algox : 
+
+public int solution(String str, int start, int end) {
+        if (start > end) {
+            return 0;
+        } else {
+            int case1 = 0;
+            if (str.charAt(start) == str.charAt(end))
+                case1 = start == end ? 1 + solution(str, start + 1, end - 1) : 2 + solution(str, start + 1, end - 1);
+            int case2 = solution(str, start + 1, end);
+            int case3 = solution(str, start, end - 1);
+            return Math.max(case1, Math.max(case2, case3));
+        }
+    }
+
+
+QUESTION : MINIMUM COST TO REACH THE LAST CELL :
+-> 2D matrix is given 
+-> Each cell has a cost associated with it for accessing 
+-> we need to start from(0, 0) cell and go till (n-1, n-1) cell 
+-> we can go only to right or down cell from current cell 
+-> find the way in which the cost is minimum 
+
+ANSWER : 
+00 01 02 03 04
+10 11 12 13 14
+20 21 22 23 24
+30 31 32 33 34
+40 41 42 43 44
+
+in the above example, to reach 44 NOTE  there are only 2 ways , from 34 or 43 , further we can reach 34 from 24 or 33 and hence the problem can be split :
+
+CASE 1 : 34 + f(to reach 34)
+CASE 2 : 43 + f(to reach 43)
+
+and we chose the minimum of both cases :
+
+algox : 
+ public int solution(int[][] matrix, int x, int y) {
+        if (x == 0 && y == 0) // since this was included, we need to remove it
+            return -matrix[0][0];
+        if (x - 1 < 0 || y - 1 < 0)
+            return Integer.MAX_VALUE;
+        else {
+            int case1 = matrix[x - 1][y] + solution(matrix, x - 1, y);
+            int case2 = matrix[x][y - 1] + solution(matrix, x, y - 1);
+            return Math.min(case1, case2);
+        }
+    }
+
+QUESTION : NUMBER OF PATHS TO REACH THE LAST CELL AT GIVEN COST :
+-> 2D matrix is given 
+-> Each cell has a cost associated with it for accessing 
+-> we need to start from(0, 0) cell and go till (n-1, n-1) cell 
+-> we can go only to right or down cell from current cell 
+-> we are given total cost to reach the last cell 
+-> Find the number o fways to reach end of matrix with given "total cost"
+
+ANSWER : 
+00 01 02 03 04
+10 11 12 13 14
+20 21 22 23 24
+30 31 32 33 34
+40 41 42 43 44
+
+again we can break down the problem into sub problems like the previous question.
+
+CASE 1 : 34 + f(to reach 34 within given limit)
+CASE 2 : 43 + f(to reach 43 within given limit)
+
+algox : 
+
+class Solution { // weight of the destination included
+    public int solution(int[][] matrix, int limit, int x, int y, int current) {
+        if (x == 0 && y == 0 && current <= limit) {
+            return 1;
+        } else if (limit < current || x < 0 || y < 0)
+            return 0;
+        else {
+            return solution(matrix, limit, x - 1, y, current + matrix[x][y])
+                    + solution(matrix, limit, x, y - 1, current + matrix[x][y]);
+        }
+    }
+}

@@ -1,0 +1,7 @@
+Backtracking Algorithm: 
+    In Backtracking Algorithm, the problem is solved in an incremental way i.e. it is an algorithmic technique for solving problems recursively by trying to build a solution incrementally, one piece at a time, removing those solutions that fail to satisfy the constraints of the problem at any point of time.
+    Some common problems that can be solved through the Backtracking Algorithm are the Hamiltonian Cycle, M-Coloring Problem, N Queen Problem, Rat in Maze Problem, etc.
+
+Easier definition is that the recursion is done in a way that based on conditions, we can come back :)
+
+IMPORTANT NOTE: dont shy away and heistate to pass inn as many arguments as needed to be passed.

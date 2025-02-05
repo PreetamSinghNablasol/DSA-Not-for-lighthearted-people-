@@ -1,0 +1,39 @@
+Floyd Warshall maintains a matrix(or adjacency list if we feel like it) for keeping track eg. 
+
+  A  B  C  D
+A 0  8  i  1
+B i  0  1  i
+C 4  i  0  i
+D i  2  9  0
+
+here 0 means the same vertex
+
+the algorithm in Floyd algorithm, simply updates the martix to determine the All source shortest path algox.
+
+Here is the algorithm : 
+> fill the matrix with 0 meaning the same vertex and filling infinite on all unknown distances.
+> if D[u][v] > D[u][viaX] + D[viaX][v] : 
+    D[u][v] = D[u][viaX] + D[viaX][v]
+    here viaX is the node that leads to the respective U or V.(eg in a-->b-->c, b is the via for c)
+
+> the iteration will work the number of nodes time.
+> for each node, we check the via and resolve the infinite distances !!!
+> eg. a--->b--->c--->d in this case, we can go to c via b hence if a ---> c is not resolved in the matrix and we hve a-->b, we can find a-->c using via b. 
+
+
+WHY floyd warshall ?
+this algorithm guarantees ASSP optimum solution.
+
+Does negative cycle affect Floyd Warshall ?
+NO !!! negative cycle only is an issue if we go through the negative cycle twice ! but note that that is not the case in floyd warshall since we only go through a cycle once and hence not being affected by negative cycle.HOWEVER although there is no infinite loop, we cannot catch negative cycle :(  
+
+for (int k = 0; k < nodeList.size(); k++) {
+			for (int i = 0; i < nodeList.size(); i++) {
+				for (int j = 0; j < nodeList.size(); j++) {
+					if (V[i][j] > V[i][k] + V[k][j]) {  // if update possible, then update path
+						V[i][j] = V[i][k] + V[k][j];    // this will keep a track on path
+					}
+				}
+			}
+		}
+ 

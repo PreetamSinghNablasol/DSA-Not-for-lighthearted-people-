@@ -1,0 +1,43 @@
+Suffix of HORSE ? E, SE, RSE, ORSE, HORSE
+
+what is suffix array : array which contains all the sorted suffixes of a string. SORTED IN LEXICAL order.
+
+its an alternative to SUFFIX tree that is compressed version of a trie and also stores are suffix.
+
+Suffix Arrays can do everyting that a suffix tree can, but, with some additional stuff like LCP array.
+
+=) LCP array: 
+
+LCP array is an array in which every index tracks how many characters two sorted adjacent suffixes have in common. 
+
+eg : 
+
+suffix array for bully :
+bully 
+ully  
+lly   
+ly    
+y     
+
+lexically sorted array for bully :
+
+bully : 0  (we store the LCP first index value to 0)
+lly   : 0
+ly    : 1  (since l is common)
+ully  : 0
+y     : 0
+
+LCP array [0,0,1,0,0].
+
+algorithms for LCP array construction can be done at O(nlog(n)) and O(n).
+
+
+APPLICATIONS : 
+
+for finding all unique substrings in a given string. The naive algorithm generates all substrings and places them in a set resulting in a O(n^2) algorithm.( finding all substrings and placing them in a set).
+
+The LCP is much more memory efficient and even space efficient. (Although there exist other OP techniques of doing this stuff.)
+
+NOTE all sbustings of a string with n elements is : n(n+1)/2
+
+now with some brain power, THE NUMBER OF UNIQUE SUBSTRINGS  = n(n+1)/2 - (sum of all values of the LCP array)
