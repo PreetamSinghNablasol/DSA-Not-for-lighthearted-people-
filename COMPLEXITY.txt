@@ -1,0 +1,47 @@
+> COMPLEXITY OF VARIOUS DS
+
+Average time complexity of different data structures for different operations
+
+Data structure		Access		Search		Insertion	Deletion
+-------------------------------------------------------------------------------
+Array				O(1)		O(N)		O(N)		O(N)
+Stack				O(N)		O(N)		O(1)		O(1)
+Queue				O(N)		O(N)		O(1)		O(1)
+Singly Linked list	O(N)		O(N)		O(1)		O(1)
+Doubly Linked List	O(N)		O(N)		O(1)		O(1)
+Hash Table			O(1)		O(1)		O(1)		O(1)
+Binary Search Tree	O(log N)	O(log N)	O(log N)	O(log N)
+AVL Tree			O(log N)	O(log N)	O(log N)	O(log N)
+B Tree				O(log N)	O(log N)	O(log N)	O(log N)
+Red Black Tree		O(log N)	O(log N)	O(log N)	O(log N)
+
+
+Worst Case time complexity of different data structures for different operations
+
+Data structure		Access		Search		Insertion	Deletion
+--------------------------------------------------------------------------------
+Array				O(1)		O(N)		O(N)		O(N)
+Stack				O(N)		O(N)		O(1)		O(1)
+Queue				O(N)		O(N)		O(1)		O(1)
+Singly Linked list	O(N)		O(N)		O(1)		O(1)
+Doubly Linked List	O(N)		O(N)		O(1)		O(1)
+Hash Table			O(N)		O(N)		O(N)		O(N)
+Binary Search Tree	O(N)		O(N)		O(N)		O(N)
+AVL Tree			O(log N)	O(log N)	O(log N)	O(log N)
+Binary Tree			O(N)		O(N)		O(N)		O(N)
+Red Black Tree		O(log N)	O(log N)	O(log N)	O(log N)
+
+
+> COMPLEXITY OF SORTING ALGORITHMS
+
+
+Algorithm					Time Complexity	 
+ 	  				Best		Average			Worst	 
+Selection Sort		Ω(n^2)		θ(n^2)			O(n^2)	 
+Bubble Sort			Ω(n)		θ(n^2)			O(n^2)	 
+Insertion Sort		Ω(n)		θ(n^2)			O(n^2)	 
+Heap Sort			Ω(n log(n))	θ(n log(n))		O(n log(n))	 
+Quick Sort			Ω(n log(n))	θ(n log(n))		O(n^2)	 
+Merge Sort			Ω(n log(n))	θ(n log(n))		O(n log(n))	 
+Bucket Sort			Ω(n+k)		θ(n+k)			O(n^2)	 
+Radix Sort			Ω(nk)		θ(nk)			O(nk)

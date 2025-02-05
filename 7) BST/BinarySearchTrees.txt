@@ -1,0 +1,18 @@
+in unbalanced binary search trees, the time complexity is actually linear i.e. O(h) ==> h is height of BST in average case but in worst case its O(n) i.e. in a schewed tree.
+
+Whereas in Balanced binary search trees, time complexity is actually logarithmic i.e. O(log(n)) in average case.
+
+
+Insertion in BST(non balanced) is : average logarithmic and worst linear(worst in a schewed tree)
+
+Removing from a BST : 
+					- find the element in the tree
+					- replace the current node with its successor
+							- if leaf node : we simply make it null
+							- if node has either a left or right subtree : simply replace the current node with the single 	  subtree
+							- if node has both left and right subtree : replace the current node with the largest from    
+							  left subtree or the smallest node from the right subtree.
+							  		- now there will be two instances of a node so remove the one that helped in replacement.
+							  		- Note : finding the highest in left subtree is going the most right in the left subtree. And keep going untill the right subtree is null and we have traversed to the highest value node in the left subtree.
+
+NOTE : in BST, insertion of an element is always as a leaf node.(so dont overthink)

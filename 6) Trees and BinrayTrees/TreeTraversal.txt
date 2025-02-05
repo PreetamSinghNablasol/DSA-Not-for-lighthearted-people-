@@ -1,0 +1,8 @@
+There are 2 types of traversing :
+> DFS :
+	> InOrder : left node right
+	> PreOrder : node left right 
+	> PostOrder : left right node
+
+> BFS : 
+	> Level Order : normal..lol

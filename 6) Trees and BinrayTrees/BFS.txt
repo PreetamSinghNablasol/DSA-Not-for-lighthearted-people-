@@ -1,0 +1,17 @@
+for performing Depth first search, we can use recursion but for BFS we need iteration.
+
+we maintain a queue starting from root
+so dequeue the queue but in doing so enqueue the left and right child of the dequeued node.
+
+so 
+enqueue -> root  (queue : ->root->)
+
+dequeue -> root and enqueue - root.left & enqueue - root.right (queue : ->root.right->root.left->)
+
+dequeue -> root.left and enqueue - root.left.left & enqueue - root.left.right (queue : ->root.left.right->root.left.left->root.right->)
+
+dequeue -> root.right and enqueue - root.right.left & enqueue - root.right.right (queue : ->root.right.right->root.right->left->root.left.right->root.left.left->)
+
+and this goes onn and the dequeue will give elements in BFS manner
+
+NOTE : in case the child is null, no enquing is done.

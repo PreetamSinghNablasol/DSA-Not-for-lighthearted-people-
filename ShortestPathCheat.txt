@@ -1,0 +1,51 @@
+for : SSSP : 
+
+NOTE: distance/weight is the currently stored distance of the node from the destination.
+
+-> BFS : we maintain a hashmap of parentnode to child node to mark the path of tarversal 
+            along with a set to keep track of the visited nodes(skip the visited nodes)
+        tarversing in BFS and if the parent is not marked for the child nodes, add parent.
+        NOTE: BFS automatically goes in a manner that the shortest path will comeup first and hence even if we reach a point in second iteration we cancel that out checking th set.
+        BFS gives shortest path interms of number of hops.
+
+
+-> DIJKSTRA (N^2): -> we maintain additional priority queue that keeps the node with the minimum distance on  top.
+            -> we can also maintin node propety or a set to keep track of visited nodes.
+    -> add starting node to the queue and go till queue is empty.
+    -> go to all the adjacent nodes and if not visited mark them with Parent weight+ edgeWeight and add to queue
+    -> if visited, compare the weight with parentWeight+edgeWeight and replace accordingly, repeat till queue is empty. 
+
+
+-> BELLMAN FORD(N+1) : -> set starting node weight to 0 and all other nodes to infinity 
+                  -> for every node, we check if parentNodeWeight + EdgeWeight < currentWeight
+                    if so, new currentWeight = parentNodeWeight + EdgeWeight 
+                  -> THis is repeated N(no. of nodes) times 
+                  -> if we run it n+1 th time and still changes happen, there is Negative cycle.
+
+
+for : ASSP : 
+
+-> Floyd Warshall : -> Maintain a matrix that will track the shortest path amongst nodes.
+                    -> mark all matrix[a][a] as 0, and all the known edge weight.
+                    -> now in the matrix, we check if there is any shortest path possible via a given edge and hence : 
+                        we fix the row and column in the matrix belonging to the node eg. in below, 0row and 0 column for A and then we check, if using this values, better path can be marked
+
+
+  A  B  C  D   (given)
+A 0  8  i  1
+B i  0  1  i    
+C 4  i  0  i
+D i  2  9  0
+
+
+  A  B  C  D   (for VIA A we derive this)
+A 0  8  i  1     
+B i  0     
+C 4     0  
+D i        0
+
+now for every other values, we check if there exists a better path VIA A and if so mark it using formula ; C-->B distance  < C-->A + A-->B
+
+repeat for each and every NODE !!
+
+Dist(I-->J) = max(Dist(I-->J), Dist(I-->K)+Dist(K-->J))
